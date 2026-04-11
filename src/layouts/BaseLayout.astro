@@ -1,34 +1,59 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  isPost?: boolean;
+}
+
+const {
+  title = "Menblog",
+  description = "个人学习、生活记录",
+  isPost = false,
+} = Astro.props;
+
+const pageTitle = title === "Menblog" ? title : `${title} - Menblog`;
+const pathname = Astro.url.pathname;
+---
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Menblog - 个人学习,生活记录</title>
-  <meta name="description" content="Menblog - 个人学习,生活记录">
+  <title>{pageTitle}</title>
+  <meta name="description" content={description}>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- 顶部装饰条 -->
+  <div class="top-bar"></div>
+
   <header class="site-header">
-    <nav class="nav-container">
+    <div class="header-inner">
       <a href="/" class="logo">
-        <span class="logo-icon">📝</span>
+        <span class="logo-icon">📋</span>
         <span class="logo-text">Menblog</span>
       </a>
-      <ul class="nav-links">
-        <li><a href="/">首页</a></li>
-        <li><a href="/tags/技术">技术</a></li>
-        <li><a href="/tags/游戏">游戏</a></li>
-        <li><a href="/tags/随笔">随笔</a></li>
-        <li><a href="/about">关于</a></li>
-      </ul>
-    </nav>
+      <nav class="nav">
+        <a href="/" class={pathname === "/" ? "nav-link active" : "nav-link"}>首页</a>
+        <a href="/tags/技术" class="nav-link tag-tech">技术</a>
+        <a href="/tags/游戏" class="nav-link tag-game">游戏</a>
+        <a href="/tags/随笔" class="nav-link tag-life">随笔</a>
+        <a href="/about" class={pathname === "/about/" ? "nav-link active" : "nav-link"}>关于</a>
+      </nav>
+    </div>
   </header>
 
-  <slot />
+  <main class="main-content">
+    <slot />
+  </main>
 
   <footer class="site-footer">
-    <div class="footer-container">
-      <p>Powered by <a href="https://astro.build" target="_blank">Astro</a></p>
+    <div class="footer-inner">
+      <p>© 2026 Menblog · 用 <span class="heart">♥</span> 记录生活</p>
     </div>
   </footer>
 </body>
@@ -41,91 +66,192 @@
     box-sizing: border-box;
   }
 
+  :root {
+    --bg: #FAFAF8;
+    --card-bg: #FFFFFF;
+    --text: #3D3D3D;
+    --text-light: #8A8A8A;
+    --border: #EDEDEA;
+    --accent-green: #8FAE8B;
+    --accent-pink: #C9A9A6;
+    --accent-blue: #8EAFC2;
+    --accent-orange: #D4A574;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --shadow-hover: 0 6px 24px rgba(0,0,0,0.10);
+    --radius: 16px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #fafafa;
+    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 
   a {
-    color: #0066cc;
+    color: var(--text);
     text-decoration: none;
   }
 
   a:hover {
-    text-decoration: underline;
+    text-decoration: none;
+  }
+
+  ::selection {
+    background: rgba(142, 175, 194, 0.35);
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-blue);
+  }
+
+  h1, h2, h3 {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 700;
+    color: #2A2A2A;
   }
 </style>
 
 <style>
+  /* 顶部装饰条 */
+  .top-bar {
+    height: 4px;
+    background: linear-gradient(90deg,
+      var(--accent-green) 0%,
+      var(--accent-blue) 33%,
+      var(--accent-pink) 66%,
+      var(--accent-orange) 100%
+    );
+  }
+
+  /* Header */
   .site-header {
-    background: #fff;
-    border-bottom: 1px solid #eee;
-    padding: 1rem 0;
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
     z-index: 100;
+    backdrop-filter: blur(8px);
   }
 
-  .nav-container {
+  .header-inner {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 2rem;
+    height: 64px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
   }
 
   .logo {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-weight: bold;
-    font-size: 1.2rem;
-    text-decoration: none;
-    color: #333;
-  }
-
-  .logo:hover {
     text-decoration: none;
   }
 
   .logo-icon {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
 
-  .nav-links {
+  .logo-text {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2A2A2A;
+    letter-spacing: 0.05em;
+  }
+
+  .nav {
     display: flex;
-    list-style: none;
-    gap: 1.5rem;
+    align-items: center;
+    gap: 0.25rem;
   }
 
-  .nav-links a {
-    color: #666;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    transition: all 0.2s;
-  }
-
-  .nav-links a:hover {
-    color: #333;
-    background: #f5f5f5;
-    text-decoration: none;
-  }
-
-  .nav-links a.active {
-    color: #1a73e8;
-    background: #e8f0fe;
-    font-weight: 500;
-  }
-
-  .site-footer {
-    text-align: center;
-    padding: 2rem 0;
-    color: #999;
+  .nav-link {
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
     font-size: 0.9rem;
-    border-top: 1px solid #eee;
-    margin-top: 3rem;
+    font-weight: 500;
+    color: var(--text-light);
+    transition: all 0.25s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--text);
+    background: var(--bg);
+  }
+
+  .nav-link.active {
+    background: var(--bg);
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .tag-tech:hover,
+  .tag-tech.active { color: var(--accent-green); background: rgba(143,174,139,0.12); }
+  .tag-game:hover,
+  .tag-game.active { color: var(--accent-orange); background: rgba(212,165,116,0.12); }
+  .tag-life:hover,
+  .tag-life.active { color: var(--accent-pink); background: rgba(201,169,166,0.12); }
+
+  /* Main */
+  .main-content {
+    flex: 1;
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 3rem;
+  }
+
+  /* Footer */
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 0;
+    text-align: center;
+  }
+
+  .footer-inner {
+    color: var(--text-light);
+    font-size: 0.85rem;
+  }
+
+  .heart {
+    color: var(--accent-pink);
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .header-inner {
+      padding: 0 1rem;
+    }
+    .logo-text {
+      font-size: 1.1rem;
+    }
+    .nav-link {
+      padding: 0.35rem 0.7rem;
+      font-size: 0.85rem;
+    }
+    .main-content {
+      padding: 1.5rem 1rem 2rem;
+    }
   }
 </style>
