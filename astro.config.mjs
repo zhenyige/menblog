@@ -1,8 +1,8 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://blog.1g6.top',
-  base: '/',
+  site: 'https://zhenyige.github.io',
+  base: '/menblog/',
   build: {
     assets: '_assets'
   },
