@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: 'hostmybytes-promotion' } }
+  ];
+}
+
+const { slug } = Astro.params;
+
+// 文章内容
+const posts: Record<string, { title: string; date: string; content: string }> = {
+  'hostmybytes-promotion': {
+    title: '今天又收到hostmybytes的促销邮件',
+    date: '2026-04-11',
+    content: `在今天，我们在数据中心上架了我们的新机器，并将在接下来的 24 小时内将所有服务重新向中国用户开放！
+
+请阅读以下的优惠信息，并务必向您的朋友推荐，我们将提供高达 15% 的推荐佣金！
+
+您可以从以下优惠中选择一项：
+
+预付3年以获得双倍的CPU、内存或存储！
+
+常规网络 VPS 套餐：
+
+- 128MB RAM VPS - $5/年
+- 768MB RAM VPS - $8/年
+- 1.5GB RAM VPS - $11/年
+- 3GB RAM VPS - $22/年
+
+点此链接查看特惠详细信息：https://clients.hostmybytes.com/cart.php?gid=50
+
+顺带一提，现在我们支持支付宝付款！
+
+来源：MKLblog'，原地址：https://king6.top/post/355.html`
+  }
+};
+
+const post = posts[slug];
+---
+
+<BaseLayout title={post?.title || '文章未找到'}>
+  <main class="container">
+    <article>
+      <header class="post-header">
+        <h1>{post?.title}</h1>
+        <time>{post?.date}</time>
+      </header>
+      
+      <div class="post-content">
+        {post?.content.split('\n\n').map(paragraph => (
+          <p>{paragraph}</p>
+        ))}
+      </div>
+    </article>
+
+    <footer class="post-footer">
+      <a href="/" class="back-link">← 返回首页</a>
+    </footer>
+  </main>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  .post-header {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 2rem;
+  }
+
+  .post-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .post-header time {
+    color: #666;
+    font-size: 0.9rem;
+  }
+
+  .post-content {
+    line-height: 1.8;
+  }
+
+  .post-content p {
+    margin-bottom: 1rem;
+  }
+
+  .post-footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+  }
+
+  .back-link {
+    color: #0066cc;
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+</style>
