@@ -1,73 +1,111 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
 
-// 获取所有文章，按日期降序排列
-const posts = (await getCollection('blog')).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-);
+const posts = (await getCollection('blog'))
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 ---
 
-<BaseLayout title="Menblog - 个人学习,生活记录">
-  <main class="container">
-    <header class="hero">
-      <h1>Menblog</h1>
-      <p class="subtitle">个人学习,生活记录</p>
-    </header>
+<BaseLayout title="Menblog" description="个人学习、生活记录">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-badge">📋 Menblog</div>
+    <h1 class="hero-title">记录生活<br>分享成长</h1>
+    <p class="hero-sub">用文字留住每一刻的思考与灵感</p>
+  </section>
 
-    <section class="posts">
-      <h2>全部文章</h2>
-      <div class="post-list">
-        {posts.map(post => (
-          <PostCard post={post} />
-        ))}
-      </div>
-      {posts.length === 0 && (
-        <p class="empty-state">暂无文章</p>
-      )}
-    </section>
-  </main>
+  <!-- 文章列表 -->
+  <section class="posts-section">
+    <h2 class="section-title">全部文章 <span class="count">{posts.length}</span></h2>
+    <div class="posts-list">
+      {posts.map(post => (
+        <PostCard
+          title={post.data.title}
+          date={post.data.date}
+          description={post.data.description}
+          tags={post.data.tags}
+          slug={post.slug}
+        />
+      ))}
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-  }
-
+  /* Hero */
   .hero {
     text-align: center;
-    padding: 3rem 0;
-    border-bottom: 1px solid #eee;
-    margin-bottom: 2rem;
+    padding: 3rem 0 2.5rem;
   }
 
-  .hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .subtitle {
-    color: #666;
-    font-size: 1.1rem;
-  }
-
-  .posts h2 {
-    font-size: 1.5rem;
+  .hero-badge {
+    display: inline-block;
+    font-size: 0.8rem;
+    color: #8FAE8B;
+    background: rgba(143,174,139,0.12);
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
     margin-bottom: 1rem;
   }
 
-  .post-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  .hero-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #1A1A1A;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
   }
 
-  .empty-state {
-    text-align: center;
-    color: #999;
-    padding: 3rem 0;
+  .hero-sub {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    font-weight: 300;
+  }
+
+  /* Section */
+  .posts-section {
+    margin-top: 2rem;
+  }
+
+  .section-title {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .count {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.05rem 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-light);
+  }
+
+  .posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  @media (max-width: 640px) {
+    .hero-title {
+      font-size: 1.7rem;
+    }
+    .hero {
+      padding: 2rem 0 1.5rem;
+    }
   }
 </style>
