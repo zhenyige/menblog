@@ -1,0 +1,218 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="关于 - Menblog">
+  <main class="container">
+    <div class="about-card">
+      <!-- 头像区域 -->
+      <div class="avatar-section">
+        <div class="avatar">🧑‍💻</div>
+        <h1 class="name">Men</h1>
+        <p class="bio">这家伙很懒，什么也没留下</p>
+      </div>
+
+      <!-- 分割线 -->
+      <div class="divider"></div>
+
+      <!-- 联系信息 -->
+      <div class="contact-section">
+        <h2 class="section-title">联系方式</h2>
+        <div class="contact-list">
+          <a href="mailto:366604999@qq.com" class="contact-item">
+            <span class="contact-icon">📧</span>
+            <span class="contact-info">
+              <span class="contact-label">邮箱</span>
+              <span class="contact-value">366604999@qq.com</span>
+            </span>
+          </a>
+          <a href="tencent://message/?uin=366604999" class="contact-item">
+            <span class="contact-icon">💬</span>
+            <span class="contact-info">
+              <span class="contact-label">QQ</span>
+              <span class="contact-value">366604999</span>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 底部 -->
+      <div class="footer-section">
+        <p class="footer-text">感谢访问 👋</p>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 3rem 1rem;
+  }
+
+  .about-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    padding: 3rem 2.5rem;
+    text-align: center;
+    animation: fadeInUp 0.6s ease;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* 头像区域 */
+  .avatar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+    transition: transform 0.3s;
+  }
+
+  .avatar:hover {
+    transform: scale(1.05);
+  }
+
+  .name {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0;
+  }
+
+  .bio {
+    color: #888;
+    font-size: 0.95rem;
+    margin: 0;
+    font-style: italic;
+  }
+
+  /* 分割线 */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #e0e0e0, transparent);
+    margin: 2.5rem 0;
+  }
+
+  /* 联系区域 */
+  .contact-section {
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: left;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: #f8f9ff;
+    border-radius: 14px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+  }
+
+  .contact-item:hover {
+    background: #f0f2ff;
+    border-color: #c7d0ff;
+    transform: translateX(4px);
+    text-decoration: none;
+  }
+
+  .contact-icon {
+    font-size: 1.5rem;
+    width: 2.5rem;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .contact-label {
+    font-size: 0.75rem;
+    color: #999;
+    font-weight: 500;
+  }
+
+  .contact-value {
+    font-size: 0.95rem;
+    color: #333;
+    font-weight: 500;
+  }
+
+  /* 底部 */
+  .footer-section {
+    padding-top: 1rem;
+  }
+
+  .footer-text {
+    color: #bbb;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  /* 响应式 */
+  @media (max-width: 480px) {
+    .about-card {
+      padding: 2rem 1.5rem;
+      border-radius: 16px;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      font-size: 2.5rem;
+    }
+
+    .name {
+      font-size: 1.5rem;
+    }
+
+    .contact-item {
+      padding: 0.875rem 1rem;
+    }
+  }
+</style>
