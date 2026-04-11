@@ -20,9 +20,12 @@ const tagColors: Record<string, { bg: string; text: string }> = {
   '随笔': { bg: 'rgba(201,169,166,0.15)', text: '#A07A78' },
 };
 
-const formatDate = (d: string) => {
-  const [y, m, day] = d.split('T')[0].split('-');
-  return `${parseInt(y)}年${parseInt(m)}月${parseInt(day)}日`;
+const formatDate = (d: string | Date) => {
+  const date = typeof d === 'string' ? new Date(d) : d;
+  const y = date.getFullYear();
+  const m = date.getMonth() + 1;
+  const day = date.getDate();
+  return `${y}年${m}月${day}日`;
 };
 ---
 
