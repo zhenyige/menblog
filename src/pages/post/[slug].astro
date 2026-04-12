@@ -13,11 +13,14 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await post.render();
 
-// 莫兰迪色标签
+// 莫兰迪色标签 - 统一蓝色系
 const tagColors: Record<string, { bg: string; text: string }> = {
-  '技术': { bg: 'rgba(143,174,139,0.15)', text: '#6B8B66' },
-  '游戏': { bg: 'rgba(212,165,116,0.15)', text: '#B07840' },
-  '随笔': { bg: 'rgba(201,169,166,0.15)', text: '#A07A78' },
+  '技术': { bg: 'rgba(142,175,194,0.18)', text: '#5588BB' },
+  '游戏': { bg: 'rgba(142,175,194,0.18)', text: '#5588BB' },
+  '随笔': { bg: 'rgba(142,175,194,0.18)', text: '#5588BB' },
+  '音乐': { bg: 'rgba(142,175,194,0.18)', text: '#5588BB' },
+  'VPS': { bg: 'rgba(142,175,194,0.18)', text: '#5588BB' },
+  '工具': { bg: 'rgba(142,175,194,0.18)', text: '#5588BB' },
 };
 
 const formatDate = (d: string | Date) => {
