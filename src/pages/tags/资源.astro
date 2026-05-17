@@ -1,0 +1,179 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const title = '蠡县县志';
+const description = '清光绪二年（1876）续修蠡县志，白话文全译本';
+---
+
+<BaseLayout title={title} description={description}>
+
+<style is:global>
+  .lixian-hero {
+    text-align: center;
+    padding: 3.5rem 0 2rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+  .lixian-badge {
+    display: inline-block;
+    font-size: 0.78rem;
+    color: #8FAE8B;
+    background: rgba(143,174,139,0.12);
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+  }
+  .lixian-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #1A1A1A;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+  .lixian-sub {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .toc-section {
+    margin-bottom: 2.5rem;
+  }
+  .toc-section-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .toc-item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: all 0.2s;
+  }
+  .toc-item:hover {
+    border-color: var(--accent-blue);
+    background: rgba(142,175,194,0.06);
+    box-shadow: var(--shadow);
+  }
+  .toc-item a {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 600;
+    color: #2A2A2A;
+    font-size: 1rem;
+    min-width: 160px;
+    flex-shrink: 0;
+  }
+  .toc-item a:hover {
+    color: #5588BB;
+    text-decoration: none;
+  }
+  .toc-desc {
+    color: var(--text-light);
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .back-link:hover {
+    color: var(--text);
+    border-color: var(--accent-blue);
+    background: rgba(142,175,194,0.08);
+    text-decoration: none;
+  }
+  @media (max-width: 640px) {
+    .lixian-title { font-size: 1.8rem; }
+    .toc-item { flex-direction: column; gap: 0.3rem; }
+    .toc-item a { min-width: auto; }
+  }
+</style>
+
+<div class="lixian-hero">
+  <div class="lixian-badge">📜 古典文献</div>
+  <h1 class="lixian-title">蠡县县志</h1>
+  <p class="lixian-sub">
+    清光绪二年（1876）续修蠡县志，白话文全译本。<br>
+    全书十卷，涵盖方舆、建置、爵秩、选举、人物、灾祥、艺文、寺观诸志。
+  </p>
+</div>
+
+<div class="toc-section">
+  <div class="toc-section-title">县志目录</div>
+  <ul class="toc-list">
+        <li class="toc-item">
+          <a href="/post/lixian-vol-0/">蠡县县志·卷首</a>
+          <span class="toc-desc">续修蠡县志序、凡例、修志衔名</span>
+        </li>
+        <li class="toc-item">
+          <a href="/post/lixian-vol-1/">蠡县县志·卷一</a>
+          <span class="toc-desc">方舆志：序、星野、沿革、山川、堤防</span>
+        </li>
+        <li class="toc-item">
+          <a href="/post/lixian-vol-2/">蠡县县志·卷二</a>
+          <span class="toc-desc">方舆志：舆图疆域、市集、风俗、方产、古迹、八景、陵墓、坊表</span>
+        </li>
+        <li class="toc-item">
+          <a href="/post/lixian-vol-3/">蠡县县志·卷三</a>
+          <span class="toc-desc">建置志、学校志、祀典志、亩籍志</span>
+        </li>
+        <li class="toc-item">
+          <a href="/post/lixian-vol-4/">蠡县县志·卷四</a>
+          <span class="toc-desc">爵秩志：侯籍、名宦、秩官、纪年</span>
+        </li>
+        <li class="toc-item">
+          <a href="/post/lixian-vol-5/">蠡县县志·卷五</a>
+          <span class="toc-desc">选举志：进士、举人、武科、封荫</span>
+        </li>
+        <li class="toc-item">
+          <a href="/post/lixian-vol-6/">蠡县县志·卷六</a>
+          <span class="toc-desc">人物志：名贤、孝义、节烈、乡贤、义行</span>
+        </li>
+        <li class="toc-item">
+          <a href="/post/lixian-vol-7/">蠡县县志·卷七</a>
+          <span class="toc-desc">人物志：贞烈、节妇</span>
+        </li>
+        <li class="toc-item">
+          <a href="/post/lixian-vol-8/">蠡县县志·卷八</a>
+          <span class="toc-desc">灾祥志、荒政志</span>
+        </li>
+        <li class="toc-item">
+          <a href="/post/lixian-vol-9/">蠡县县志·卷九</a>
+          <span class="toc-desc">艺文志</span>
+        </li>
+        <li class="toc-item">
+          <a href="/post/lixian-vol-10/">蠡县县志·卷十</a>
+          <span class="toc-desc">寺观志、仙释志</span>
+        </li>
+  </ul>
+</div>
+
+</BaseLayout>
